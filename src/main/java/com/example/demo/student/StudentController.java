@@ -1,9 +1,7 @@
 package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +20,27 @@ public class StudentController {
 
     @GetMapping //to get something out from our server
     public List<Student> getStudents(){
+
         return studentService.getStudents();
+    }
+
+    @PostMapping //to add new resources to our server
+    public void registerNewStudent(@RequestBody Student student){
+        studentService.addNewStudent(student);
+    }
+
+    //to update resources in our system
+    @PutMapping(path = "{studentId}")
+    public void updateStudent(
+            @PathVariable("studentId") Long studentId,
+            @RequestParam(required = false) String studentName,
+            @RequestParam(required = false) String studentEmail) {
+        studentService.updateStudent(studentId, studentName, studentEmail);
+    }
+
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId){
+        studentService.deleteStudent(studentId);
     }
 }
