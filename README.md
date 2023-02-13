@@ -1,3 +1,3 @@
 # Spring-Boot-practice
 
-In this project I started my learning of Spring framework.
+I started learning the Spring framework from this project
